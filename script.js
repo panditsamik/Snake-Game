@@ -20,10 +20,20 @@ var gameOver = false;
 
 window.onload = function () {
   // Set board height and width
+
+  const reloadButton = document.getElementById("reloadButton");
+  reloadButton.addEventListener("click", function () {
+    // Reload the page to restart the game
+    location.reload();
+  });
+  
   board = document.getElementById("board");
   board.height = total_row * blockSize;
   board.width = total_col * blockSize;
   context = board.getContext("2d");
+
+  board.style.border = "3px solid black";
+  board.style.borderRadius = "5px";
 
   placeFood();
   document.addEventListener("keyup", changeDirection); //for movements
@@ -42,7 +52,9 @@ function update() {
 
   // Set food color and position
   context.fillStyle = "yellow";
+  context.strokeStyle = "black";
   context.fillRect(foodX, foodY, blockSize, blockSize);
+  context.strokeRect(foodX, foodY, blockSize, blockSize);
 
   if (snakeX == foodX && snakeY == foodY) {
     snakeBody.push([foodX, foodY]);
@@ -59,11 +71,14 @@ function update() {
   }
 
   context.fillStyle = "white";
+  context.strokeStyle = "black"
   snakeX += speedX * blockSize; //updating Snake position in X coordinate.
   snakeY += speedY * blockSize; //updating Snake position in Y coordinate.
   context.fillRect(snakeX, snakeY, blockSize, blockSize);
+  context.strokeRect(snakeX, snakeY, blockSize, blockSize);
   for (let i = 0; i < snakeBody.length; i++) {
     context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+    context.strokeRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
   }
 
   if (
