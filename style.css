@@ -1,72 +1,81 @@
+/* Write CSS Here */
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: rgba(0, 0, 0, 0.596);
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+    text-align: center;
 }
 
-h1 {
-  color: #fff;
-  text-align: center;
-  font-size: 50px;
-}
-
-#game-container {
-  background-color: #0d98ba; /* Change the background color to a suitable color */
-  border: 2px solid #333;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  margin-bottom: 20px;
+.geeks {
+    font-size: 40px;
+    font-weight: bold;
+    color: green;
 }
 
 
 
-#game-board {
-  width: 300px;
-  height: 300px;
-  border: 1px solid #333;
-  position: relative;
-  margin-bottom: 20px;
+@keyframes textclip {
+    to {
+        background-position: 200% center;
+    }
 }
 
-.snake-segment {
-  width: 20px;
-  height: 20px;
-  background-color: #333;
-  position: absolute;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
 }
 
-.food {
-  width: 20px;
-  height: 20px;
-  background-color: red;
-  position: absolute;
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+canvas {
+    border: 2px solid #333;
+    border-radius: 5px;
+}
+
+.controls {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+select {
+    padding: 5px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 #score {
-  font-size: 24px;
-  margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-#game-over {
-  font-size: 36px;
-  color: red;
-  display: none;
-}
-
-#restart-button {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 20px;
-  cursor: pointer;
-  display: none;
+.game-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }

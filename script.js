@@ -1,161 +1,113 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const gameBoard = document.getElementById("game-board");
-  const gridSize = 15;
-  const cellSize = gameBoard.offsetWidth / gridSize;
+var blockSize = 25;
+var total_row = 17; //total row number
+var total_col = 17; //total column number
+var board;
+var context;
 
-  let snake = [{ x: 5, y: 5 }];
-  let direction = "right";
-  let food = getRandomPosition();
-  let score = 0;
-  let gameInterval;
+var snakeX = blockSize * 5;
+var snakeY = blockSize * 5;
 
-  const scoreDisplay = document.getElementById("score");
-  const gameOverMessage = document.getElementById("game-over");
-  const restartButton = document.getElementById("restart-button");
+var speedX = 0;
+var speedY = 0;
 
-  function getRandomPosition() {
-      const x = Math.floor(Math.random() * gridSize);
-      const y = Math.floor(Math.random() * gridSize);
-      return { x, y };
-  }
+var snakeBody = [];
 
-  function drawSnake() {
-      for (const segment of snake) {
-          const snakeSegment = document.createElement("div");
-          snakeSegment.className = "snake-segment";
-          snakeSegment.style.left = segment.x * cellSize + "px";
-          snakeSegment.style.top = segment.y * cellSize + "px";
-          gameBoard.appendChild(snakeSegment);
-      }
-  }
+var foodX;
+var foodY;
 
-  function drawFood() {
-      const foodElement = document.createElement("div");
-      foodElement.className = "food";
-      foodElement.style.left = food.x * cellSize + "px";
-      foodElement.style.top = food.y * cellSize + "px";
-      gameBoard.appendChild(foodElement);
-  }
+var gameOver = false;
+var score = 0;
+var difficulty = 5; // Adjust this value for difficulty level
 
-  function moveSnake() {
-      let newHead = { ...snake[0] };
+window.onload = function() {
+    board = document.getElementById("board");
+    board.height = total_row * blockSize;
+    board.width = total_col * blockSize;
+    context = board.getContext("2d");
 
-      switch (direction) {
-          case "up":
-              newHead.y -= 1;
-              break;
-          case "down":
-              newHead.y += 1;
-              break;
-          case "left":
-              newHead.x -= 1;
-              break;
-          case "right":
-              newHead.x += 1;
-              break;
-      }
+    placeFood();
+    document.addEventListener("keyup", changeDirection);
+    setInterval(update, 1000 / difficulty);
+};
 
-      snake.unshift(newHead);
+function update() {
+    if (gameOver) {
+        return;
+    }
 
-      if (newHead.x === food.x && newHead.y === food.y) {
-          // Snake ate the food
-          score += 10;
-          scoreDisplay.textContent = "Score: " + score;
-          food = getRandomPosition();
-      } else {
-          // Remove the tail segment
-          snake.pop();
-      }
-  }
+    context.fillStyle = "green";
+    context.fillRect(0, 0, board.width, board.height);
 
-  function checkCollision() {
-      const head = snake[0];
-      // Check if the snake hits the wall or itself
-      if (
-          head.x < 0 ||
-          head.y < 0 ||
-          head.x >= gridSize ||
-          head.y >= gridSize ||
-          isSnakeSegment(head, snake.slice(1))
-      ) {
-          gameOver();
-      }
-  }
+    context.fillStyle = "yellow";
+    context.fillRect(foodX, foodY, blockSize, blockSize);
 
-  function isSnakeSegment(segment, segments) {
-      for (const s of segments) {
-          if (segment.x === s.x && segment.y === s.y) {
-              return true;
-          }
-      }
-      return false;
-  }
+    if (snakeX == foodX && snakeY == foodY) {
+        snakeBody.push([foodX, foodY]);
+        placeFood();
+        score += 10;
+        document.getElementById("score").innerText = "Score: " + score;
+    }
 
-  function clearBoard() {
-      while (gameBoard.firstChild) {
-          gameBoard.removeChild(gameBoard.firstChild);
-      }
-  }
+    for (let i = snakeBody.length - 1; i > 0; i--) {
+        snakeBody[i] = snakeBody[i - 1];
+    }
+    if (snakeBody.length) {
+        snakeBody[0] = [snakeX, snakeY];
+    }
 
-  function resetGame() {
-      snake = [{ x: 5, y: 5 }];
-      direction = "right";
-      food = getRandomPosition();
-      score = 0;
-      scoreDisplay.textContent = "Score: " + score;
-      gameOverMessage.style.display = "none";
-      restartButton.style.display = "none";
-  }
+    context.fillStyle = "white";
+    snakeX += speedX * blockSize;
+    snakeY += speedY * blockSize;
+    context.fillRect(snakeX, snakeY, blockSize, blockSize);
 
-  function startGame() {
-      clearBoard();
-      drawSnake();
-      drawFood();
-      scoreDisplay.textContent = "Score: " + score;
-      gameInterval = setInterval(() => {
-          moveSnake();
-          checkCollision();
-          clearBoard();
-          drawSnake();
-          drawFood();
-      }, 100);
-  }
+    for (let i = 0; i < snakeBody.length; i++) {
+        context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+        if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
+            gameOver = true;
+            alert("Game Over\nScore: " + score);
+        }
+    }
 
-  function gameOver() {
-      clearInterval(gameInterval);
-      gameOverMessage.style.display = "block";
-      restartButton.style.display = "block";
-  }
+    if (
+        snakeX < 0 ||
+        snakeX > total_col * blockSize ||
+        snakeY < 0 ||
+        snakeY > total_row * blockSize
+    ) {
+        gameOver = true;
+        alert("Game Over\nScore: " + score);
+    }
+}
 
-  restartButton.addEventListener("click", () => {
-      resetGame();
-      startGame();
-  });
+function changeDirection(e) {
+    if (e.code == "ArrowUp" && speedY != 1) {
+        speedX = 0;
+        speedY = -1;
+    } else if (e.code == "ArrowDown" && speedY != -1) {
+        speedX = 0;
+        speedY = 1;
+    } else if (e.code == "ArrowLeft" && speedX != 1) {
+        speedX = -1;
+        speedY = 0;
+    } else if (e.code == "ArrowRight" && speedX != -1) {
+        speedX = 1;
+        speedY = 0;
+    }
+}
 
-  startGame();
+function placeFood() {
+    foodX = Math.floor(Math.random() * total_col) * blockSize;
+    foodY = Math.floor(Math.random() * total_row) * blockSize;
+}
 
-  document.addEventListener("keydown", (event) => {
-      switch (event.key) {
-          case "ArrowUp":
-              if (direction !== "down") {
-                  direction = "up";
-              }
-              break;
-          case "ArrowDown":
-              if (direction !== "up") {
-                  direction = "down";
-              }
-              break;
-          case "ArrowLeft":
-              if (direction !== "right") {
-                  direction = "left";
-              }
-              break;
-          case "ArrowRight":
-              if (direction !== "left") {
-                  direction = "right";
-              }
-              break;
-      }
-  });
-});
+
+
+// Add an event listener to the "Start Game" button
+document.getElementById("start-button").addEventListener("click", startGame);
+
+function startGame() {
+    // Retrieve the selected difficulty level from the dropdown
+    var selectedDifficulty = parseInt(document.getElementById("difficulty").value);
+    // Clear the existing canvas and start the game with the selected difficulty
+    resetGame(selectedDifficulty);
+}
