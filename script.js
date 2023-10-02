@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const scoreDisplay = document.getElementById("score");
   const gameOverMessage = document.getElementById("game-over");
-  const restartButton = document.getElementById("restart-button");
+  const replayButton = document.getElementById("replay-button");
 
   function getRandomPosition() {
       const x = Math.floor(Math.random() * gridSize);
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       score = 0;
       scoreDisplay.textContent = "Score: " + score;
       gameOverMessage.style.display = "none";
-      restartButton.style.display = "none";
+      replayButton.style.display = "none";
   }
 
   function startGame() {
@@ -122,15 +122,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function gameOver() {
-      clearInterval(gameInterval);
-      gameOverMessage.style.display = "block";
-      restartButton.style.display = "block";
+    clearInterval(gameInterval);
+    gameOverMessage.textContent = "Game Over"; // Set the message to "Game Over"
+    gameOverMessage.style.display = "block";
+    replayButton.style.display = "block";
   }
 
-  restartButton.addEventListener("click", () => {
-      resetGame();
-      startGame();
-  });
+//   replayButton.addEventListener("click", () => {
+//       resetGame();
+//       startGame();
+//   });
+
+  replayButton.addEventListener("click", () => {
+    replayButton.style.display = "none";
+    gameOverMessage.textContent = "Starting...";
+    setTimeout(() => {
+        resetGame();
+        startGame();
+    }, 2000);
+});
+
 
   startGame();
 
