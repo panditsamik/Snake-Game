@@ -1,9 +1,26 @@
 /* Write CSS Here */
 body {
   text-align: center;
+  background-color: rgb(90, 90, 226);
 }
-.geeks {
-  font-size: 40px;
-  font-weight: bold;
-  color: green;
+.main-heading {
+  background: darkseagreen;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  color: rgb(241, 30, 30);
+  font-family: "Young Serif", serif;
+  border: 3px solid black;
+  border-radius: 5px;
+}
+.reload {
+  border: 3px solid black;
+  border-radius: 5px;
+  padding: 2px;
+  font-family: "Young Serif", serif;
+  background-color: yellow;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
 }
