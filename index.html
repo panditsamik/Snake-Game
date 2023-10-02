@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" , content="width=device-width, initial-scale=1.0" />
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="game-container">
+        <h1 class="game-title">Snake Game</h1>
+        <canvas id="board"></canvas>
+        <div class="controls">
+            <button id="start-button">Start Game</button>
+            <div>
+                <label for="difficulty">Select Difficulty:</label>
+                <select id="difficulty">
+                    <option value="5">Easy</option>
+                    <option value="10">Medium</option>
+                    <option value="15">Hard</option>
+                </select>
+            </div>
+            <div id="score">Score: 0</div>
+        </div>
+    </div>
     <script src="script.js"></script>
-  </head>
+</body>
 
-  <body>
-
-    <h1 class="main-heading"> Snake Game </h1>
-
-   
-      <div class="animate-charcter">
-        <h3 > Snake Game</h3>
-      </div>
-  
-      <div class="geeks"></div>
-    
-
-    <canvas id="board"></canvas>
-    <script src="script.js"></script>
-    <button id="reloadButton" class = "reload">Reload Game</button>
-  </body>
 </html>
