@@ -79,3 +79,26 @@ select {
     font-weight: bold;
     margin-bottom: 20px;
 }
+
+.popup-container {
+    position: absolute;
+    height: 200px;
+    width: 400px;
+    top: 30%;
+    background-color: antiquewhite;
+    padding-top: 90px;
+    color: red;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.visible {
+    visibility: hidden;
+}
+
+.popup-text {
+    margin-top: 20%;
+    color: red;
+    font-size: 40px;
+    font-weight: bold;
+}

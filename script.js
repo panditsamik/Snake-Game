@@ -17,7 +17,9 @@ var foodY;
 
 var gameOver = false;
 var score = 0;
-var difficulty = 5; // Adjust this value for difficulty level
+ // Adjust this value for difficulty level
+var difficulty = 5;
+var popup =  document.getElementById("popup");
 
 window.onload = function() {
     board = document.getElementById("board");
@@ -75,7 +77,10 @@ function update() {
         snakeY > total_row * blockSize
     ) {
         gameOver = true;
-        alert("Game Over\nScore: " + score);
+        // alert("Game Over\nScore: " + score);
+        popup.classList.toggle("visible")
+        popup.innerText = "GameOver\nScore: " + score
+        
     }
 }
 
@@ -106,8 +111,11 @@ function placeFood() {
 document.getElementById("start-button").addEventListener("click", startGame);
 
 function startGame() {
+    //reloads the game into the initial state
+    location.reload();
     // Retrieve the selected difficulty level from the dropdown
-    var selectedDifficulty = parseInt(document.getElementById("difficulty").value);
-    // Clear the existing canvas and start the game with the selected difficulty
-    resetGame(selectedDifficulty);
+    var difficulty = parseInt(document.getElementById("difficulty").value);
+console.log(difficulty);
+
 }
+
