@@ -112,10 +112,10 @@ function saveHighestScore() {
 }
 
 function loadHighestScore() {
-    highScore = localStorage.getItem("highestScore") || 0;
+    highestScore = localStorage.getItem("highestScore") || 0;
 }
 
-loadHighScore();
+loadHighestScore();
 
 // When the window closes, it saves the high score
 window.addEventListener("beforeunload", saveHighestScore);
