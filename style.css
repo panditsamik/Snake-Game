@@ -69,7 +69,7 @@ select {
     margin-bottom: 10px;
 }
 
-#score {
+#score, #highest-score {
     font-size: 18px;
     font-weight: bold;
 }
@@ -79,6 +79,7 @@ select {
     font-weight: bold;
     margin-bottom: 20px;
 }
+
 #game-over {
     font-size: 36px;
     font-weight: bold;
@@ -91,3 +92,4 @@ select {
     50% { opacity: 1; }
     100% { opacity: 0; }
 }
+

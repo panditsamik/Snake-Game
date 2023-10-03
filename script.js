@@ -17,6 +17,7 @@ var foodY;
 
 var gameOver = false;
 var score = 0;
+var highestScore = 0;
 var difficulty = 5; // Adjust this value for difficulty level
 
 var startButton = document.getElementById("start-button");
@@ -56,8 +57,12 @@ function update() {
         snakeBody.push([foodX, foodY]);
         placeFood();
         score += 10;
+        if (score > highestScore) {
+            highestScore = score;
+        }
         document.getElementById("score").innerText = "Score: " + score;
     }
+    document.getElementById("highest-score").innerText = "Highest Score: " + highestScore;
 
     for (let i = snakeBody.length - 1; i > 0; i--) {
         snakeBody[i] = snakeBody[i - 1];
@@ -76,9 +81,14 @@ function update() {
         createSnakeSegment(snakeBody[i][0], snakeBody[i][1]);
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
             gameOver = true;
+high-score
+            alert("Game Over\nScore: " + score + "\nHighest Score: " + highestScore);
+            document.getElementById('highest').innerText = "Highest Score: " + highestScore;
+
             document.getElementById("game-over").style.display = "block";
             replayButton.style.display = "block";
             startButton.style.display = "none";
+
         }
     }
 
@@ -89,9 +99,14 @@ function update() {
         snakeY > total_row * blockSize
     ) {
         gameOver = true;
+
+        alert("Game Over\nScore: " + score + "\nHighest Score: " + highestScore);
+        document.getElementById('highest').innerText = "Highest Score: " + highestScore;
+
         document.getElementById("game-over").style.display = "block";
         replayButton.style.display = "block";
         startButton.style.display = "none";
+
     }
 }
 
@@ -116,6 +131,21 @@ function placeFood() {
     foodY = Math.floor(Math.random() * total_row) * blockSize;
 }
 
+
+function saveHighestScore() {
+    localStorage.setItem("highestScore", highestScore);
+}
+
+function loadHighestScore() {
+    highestScore = localStorage.getItem("highestScore") || 0;
+}
+
+loadHighestScore();
+
+// When the window closes, it saves the high score
+window.addEventListener("beforeunload", saveHighestScore);
+
+
 // Add an event listener to the "Start Game" button
 startButton.addEventListener("click", startGame);
 
@@ -126,6 +156,11 @@ function startGame() {
     resetGame(selectedDifficulty);
 }
 
+
+function resetGame() {
+    location.reload();
+}
+=======
 // Add an event listener to the "Replay" button
 replayButton.addEventListener("click", function() {
     document.getElementById("game-over").style.display = "none";
@@ -163,3 +198,4 @@ function resetGame(selectedDifficulty) {
 
 // Initial game setup
 init();
+
