@@ -38,7 +38,7 @@ function update() {
     context.fillStyle = "green";
     context.fillRect(0, 0, board.width, board.height);
 
-    context.fillStyle = "yellow";
+    context.fillStyle = "red";
     context.fillRect(foodX, foodY, blockSize, blockSize);
 
     if (snakeX == foodX && snakeY == foodY) {
@@ -109,5 +109,15 @@ function startGame() {
     // Retrieve the selected difficulty level from the dropdown
     var selectedDifficulty = parseInt(document.getElementById("difficulty").value);
     // Clear the existing canvas and start the game with the selected difficulty
-    resetGame(selectedDifficulty);
-}
+    // resetGame(selectedDifficulty);
+    speedX=0;
+    speedY=0;
+    gameOver=false;
+    snakeX = blockSize * 5;
+    snakeY = blockSize * 5;
+    snakeBody=[];
+    score=0;
+    document.getElementById("score").innerText = "Score: " + score;
+    
+    placeFood();
+}       

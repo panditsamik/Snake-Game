@@ -1,8 +1,8 @@
 /* Write CSS Here */
 
-body {
-    text-align: center;
-}
+/* body {
+   
+} */
 
 .geeks {
     font-size: 40px;
@@ -19,7 +19,11 @@ body {
 }
 
 body {
-    font-family: Arial, sans-serif;
+    background-image: url('background2.avif');
+    background-repeat:round;
+    
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -30,14 +34,15 @@ body {
 }
 
 .game-container {
+    background-color: greenyellow;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
+    /* background-color: #fff; */
     border: 1px solid #ccc;
-    padding: 20px;
+    padding: 4px;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 canvas {
@@ -54,28 +59,40 @@ canvas {
 
 button {
     padding: 10px 20px;
-    background-color: #333;
+    background-color: #bb3131;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     margin-bottom: 10px;
+    font-size:large;
+    font-weight: bolder;
 }
 
 select {
     padding: 5px;
     border: 1px solid #333;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-bottom: 10px;
+}
+select:hover{
+    cursor:pointer;
 }
 
 #score {
     font-size: 18px;
     font-weight: bold;
 }
-
 .game-title {
     font-size: 36px;
-    font-weight: bold;
+    font-weight: bolder;
     margin-bottom: 20px;
+    color:rgb(54, 49, 49); 
+}
+label{
+    font-weight: bold;
+}
+#start-button:hover{
+    background-color: rgb(70, 179, 37);
+    color:black;
 }
