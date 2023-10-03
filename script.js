@@ -194,8 +194,12 @@ function resetGame(selectedDifficulty) {
     init();
 }
 
-
+// To restart game with spacebar
+document.addEventListener("keydown", function(event) {
+    if(event.code==="Space"){
+        resetGame();
+    }
+});
 
 // Initial game setup
 init();
-
