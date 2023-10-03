@@ -17,6 +17,7 @@ var foodY;
 
 var gameOver = false;
 var score = 0;
+var highScore = 0;
 var difficulty = 5; // Adjust this value for difficulty level
 
 window.onload = function() {
@@ -45,8 +46,12 @@ function update() {
         snakeBody.push([foodX, foodY]);
         placeFood();
         score += 10;
+        if (score > highScore) {
+            highScore = score;
+        }
         document.getElementById("score").innerText = "Score: " + score;
     }
+    document.getElementById("high-score").innerText = "High Score: " + highScore;
 
     for (let i = snakeBody.length - 1; i > 0; i--) {
         snakeBody[i] = snakeBody[i - 1];
@@ -64,7 +69,8 @@ function update() {
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
             gameOver = true;
-            alert("Game Over\nScore: " + score);
+            alert("Game Over\nScore: " + score + "\nHigh Score: " + highScore);
+            document.getElementById('high').innerText = "High Score: " + highScore;
         }
     }
 
@@ -75,7 +81,8 @@ function update() {
         snakeY > total_row * blockSize
     ) {
         gameOver = true;
-        alert("Game Over\nScore: " + score);
+        alert("Game Over\nScore: " + score + "\nHigh Score: " + highScore);
+        document.getElementById('high').innerText = "High Score: " + highScore;
     }
 }
 
@@ -100,7 +107,18 @@ function placeFood() {
     foodY = Math.floor(Math.random() * total_row) * blockSize;
 }
 
+function saveHighScore() {
+    localStorage.setItem("highScore", highScore);
+}
 
+function loadHighScore() {
+    highScore = localStorage.getItem("highScore") || 0;
+}
+
+loadHighScore();
+
+// When the window closes, it saves the high score
+window.addEventListener("beforeunload", saveHighScore);
 
 // Add an event listener to the "Start Game" button
 document.getElementById("start-button").addEventListener("click", startGame);
@@ -110,4 +128,8 @@ function startGame() {
     var selectedDifficulty = parseInt(document.getElementById("difficulty").value);
     // Clear the existing canvas and start the game with the selected difficulty
     resetGame(selectedDifficulty);
+}
+
+function resetGame() {
+    location.reload();
 }

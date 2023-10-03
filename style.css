@@ -69,7 +69,7 @@ select {
     margin-bottom: 10px;
 }
 
-#score {
+#score, #high-score {
     font-size: 18px;
     font-weight: bold;
 }
