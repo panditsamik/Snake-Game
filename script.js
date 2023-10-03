@@ -160,7 +160,7 @@ function startGame() {
 function resetGame() {
     location.reload();
 }
-=======
+
 // Add an event listener to the "Replay" button
 replayButton.addEventListener("click", function() {
     document.getElementById("game-over").style.display = "none";
