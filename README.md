@@ -38,6 +38,15 @@ To run the Snake Game locally or try it out, follow these steps:
 - `style.css`: CSS styles for styling the game layout.
 - `script.js`: JavaScript code that handles the game logic and functionality.
 
+## Run the snake game using docker container
+
+ ```bash
+   docker build -t snake:<tag> .
+   ```
+ ```bash
+   docker run -itd -p 80:80 snake:<tag>
+   ```
+
 ## Issues and Feedback
 
 If you encounter any issues, have ideas for improvements, or want to report a bug, please [create an issue](https://github.com/your-username/Snake-Game/issues). Your feedback is valuable to us, and we appreciate your contributions to make this project better.
