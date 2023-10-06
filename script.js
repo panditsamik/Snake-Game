@@ -35,12 +35,38 @@ function init() {
 }
 
 function createSnakeSegment(x, y) {
+    // Draw snake body
     context.beginPath();
     context.arc(x + blockSize / 2, y + blockSize / 2, blockSize / 2, 0, Math.PI * 2);
     context.fillStyle = "white";
     context.fill();
     context.closePath();
+
+    // Draw eyes only on the head
+    if (x === snakeX && y === snakeY) {
+        let eyeRadius = blockSize / 10;
+        let eyeOffsetX = blockSize / 4;
+        let eyeOffsetY = blockSize / 4;
+
+        // Left eye
+        let eyeX1 = x + eyeOffsetX;
+        let eyeY = y + eyeOffsetY;
+        context.beginPath();
+        context.arc(eyeX1, eyeY, eyeRadius, 0, Math.PI * 2);
+        context.fillStyle = "black";
+        context.fill();
+        context.closePath();
+
+        // Right eye
+        let eyeX2 = x + 3 * eyeOffsetX;
+        context.beginPath();
+        context.arc(eyeX2, eyeY, eyeRadius, 0, Math.PI * 2);
+        context.fillStyle = "black";
+        context.fill();
+        context.closePath();
+    }
 }
+
 
 function update() {
     if (gameOver) {
@@ -81,7 +107,7 @@ function update() {
         createSnakeSegment(snakeBody[i][0], snakeBody[i][1]);
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
             gameOver = true;
-high-score
+            high - score
             alert("Game Over\nScore: " + score + "\nHighest Score: " + highestScore);
             document.getElementById('highest').innerText = "Highest Score: " + highestScore;
 
@@ -162,7 +188,7 @@ function resetGame() {
 }
 
 // Add an event listener to the "Replay" button
-replayButton.addEventListener("click", function() {
+replayButton.addEventListener("click", function () {
     document.getElementById("game-over").style.display = "none";
     replayButton.style.display = "none";
     startButton.style.display = "block";
