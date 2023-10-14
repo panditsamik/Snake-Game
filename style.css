@@ -30,14 +30,15 @@ body {
 }
 
 .game-container {
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: 2px solid grey;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    
 }
 
 canvas {
@@ -51,7 +52,7 @@ canvas {
     flex-direction: column;
     align-items: center;
 }
-
+/* Added hovering effect to the buttons to look good */
 button {
     padding: 10px 20px;
     background-color: #333;
@@ -60,7 +61,31 @@ button {
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 10px;
+    transition: transform 0.5s ease;
+    font-size: 18px;
 }
+button:hover{
+    background-color: grey;
+    color: black;
+    transform: scale(1.1);
+}
+#span1{
+    text-shadow: 2px 2px 8px #FF0000;
+    font-size: 19px;
+}
+/* Added text shadow to the text */
+#label1,#score,#highest-score,#game-over{
+    text-shadow: 2px 2px 8px #FF0000;
+    font-size: 19px;
+}
+
+
+#start-button:hover {
+    background-color: #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    color: #060000;
+}
+
 
 select {
     padding: 5px;
@@ -69,12 +94,14 @@ select {
     margin-bottom: 10px;
 }
 
-#score, #highest-score {
+#score,
+#highest-score {
     font-size: 18px;
     font-weight: bold;
 }
 
 .game-title {
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 20px;
@@ -88,8 +115,36 @@ select {
 }
 
 @keyframes blink {
-    0% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
+#game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: red;
+    font-size: 4rem;
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

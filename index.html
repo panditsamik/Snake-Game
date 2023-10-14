@@ -6,18 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
     <link rel="stylesheet" href="style.css">
+
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+
+    <audio id="eatSound" src="./food_G1U6tlb.mp3"></audio>
+    <audio id="gameOverSound" src="./sound_ErK79lZ.mp3"></audio>
+
 </head>
 
 <body>
+    
+
     <div class="game-container">
         <h1 class="game-title">Snake Game</h1>
         <canvas id="board"></canvas>
         <div class="controls">
             <button id="start-button">Start Game</button>
-            <button id="replay-button" style="display: none;">Replay</button> <!-- Replay button initially hidden -->
+            <button id="replay-button" style="display: none;">Replay</button> <span id="span1"> Replay button initially hidden</span>
             <div>
-                <label for="difficulty">Select Difficulty:</label>
+                <label id="label1" for="difficulty">Select Difficulty:</label>
                 <select id="difficulty">
                     <option value="5">Easy</option>
                     <option value="10">Medium</option>
@@ -27,34 +34,11 @@
             <div id="score">Score: 0</div>
             <div id="highest-score">Highest Score: 0</div>
         </div>
-        <div id="game-over" style="display: none;">Game Over</div> <!-- Game Over message initially hidden -->
+        <div id="game-over" style="display: none;">
+            <h1>Game Over</h1>
+        </div> <!-- Game Over message initially hidden -->
     </div>
     <script src="script.js"></script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
