@@ -62,6 +62,12 @@ button {
     margin-bottom: 10px;
 }
 
+#start-button:hover {
+    background-color: #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    color: #060000;
+}
+
 select {
     padding: 5px;
     border: 1px solid #333;
@@ -69,7 +75,8 @@ select {
     margin-bottom: 10px;
 }
 
-#score, #highest-score {
+#score,
+#highest-score {
     font-size: 18px;
     font-weight: bold;
 }
@@ -88,8 +95,36 @@ select {
 }
 
 @keyframes blink {
-    0% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
+#game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: red;
+    font-size: 4rem;
+    animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
