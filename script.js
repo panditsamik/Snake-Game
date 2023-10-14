@@ -20,6 +20,10 @@ var score = 0;
 var highestScore = 0;
 var difficulty = 5; // Adjust this value for difficulty level
 
+const eatSound = document.getElementById("eatSound");
+const gameOverSound = document.getElementById("gameOverSound");
+
+
 var startButton = document.getElementById("start-button");
 var replayButton = document.getElementById("replay-button");
 
@@ -109,12 +113,13 @@ function update() {
             gameOver = true;
             high - score
             alert("Game Over\nScore: " + score + "\nHighest Score: " + highestScore);
+            location.reload();
             document.getElementById('highest').innerText = "Highest Score: " + highestScore;
 
             document.getElementById("game-over").style.display = "block";
             replayButton.style.display = "block";
             startButton.style.display = "none";
-
+            
         }
     }
 
@@ -125,7 +130,7 @@ function update() {
         snakeY > total_row * blockSize
     ) {
         gameOver = true;
-
+        gameOverSound.play();
         alert("Game Over\nScore: " + score + "\nHighest Score: " + highestScore);
         document.getElementById('highest').innerText = "Highest Score: " + highestScore;
 
@@ -152,6 +157,8 @@ function changeDirection(e) {
     }
 }
 
+
+
 function placeFood() {
     foodX = Math.floor(Math.random() * total_col) * blockSize;
     foodY = Math.floor(Math.random() * total_row) * blockSize;
@@ -176,6 +183,7 @@ window.addEventListener("beforeunload", saveHighestScore);
 startButton.addEventListener("click", startGame);
 
 function startGame() {
+    eatSound.play();
     // Retrieve the selected difficulty level from the dropdown
     var selectedDifficulty = parseInt(document.getElementById("difficulty").value);
     // Clear the existing canvas and start the game with the selected difficulty
@@ -229,3 +237,4 @@ document.addEventListener("keydown", function(event) {
 
 // Initial game setup
 init();
+
